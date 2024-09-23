@@ -1,60 +1,73 @@
 import 'package:dartz/dartz.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalKeyValueStorageKeys {
   static const String IsDarkThemeMode = 'IsDarkThemeMode';
 }
 
-abstract class LocalKeyValueStorage {
+abstract class LocalKeyValueStorage extends GetxService {
   // TODO: define result type
-  Future<Either<String, Unit>> save<T>(String key, T data);
-  Future<Either<String, bool>> readBool(String key);
+  Future<(bool, Unit)> save<T>(String key, T data);
+  Future<(bool, bool)> readBool(String key);
 }
 
 typedef SharedPrefsProvider = Future<SharedPreferences> Function();
 
-class SharedPreferencesStorage implements LocalKeyValueStorage {
-  final SharedPrefsProvider _storage;
+class SharedPreferencesStorage extends LocalKeyValueStorage {
+  late SharedPrefsProvider storage;
 
-  SharedPreferencesStorage({SharedPrefsProvider? storage})
-      : _storage = storage ?? SharedPreferences.getInstance;
-
-  @override
-  Future<Either<String, Unit>> save<T>(String key, T data) async {
-    try {
-      final prefs = await _storage();
-      switch (T) {
-        case == bool:
-          await prefs.setBool(key, data as bool);
-          return right(unit);
-        case == int:
-          await prefs.setInt(key, data as int);
-          return right(unit);
-        case == double:
-          await prefs.setDouble(key, data as double);
-          return right(unit);
-        case == String:
-          await prefs.setString(key, data as String);
-          return right(unit);
-        default:
-          return left('Type not supported');
-      }
-    } catch (ex) {
-      return left('Error : $ex');
-    }
+  Future<SharedPreferencesStorage> conn() async {
+    storage = SharedPreferences.getInstance;
+    return this;
   }
 
   @override
-  Future<Either<String, bool>> readBool(String key) async {
+  Future<(bool, Unit)> save<T>(String key, T data) async {
+    // TODO
+    bool err = false;
+
     try {
-      final prefs = await _storage();
+      final prefs = await storage();
+      switch (T) {
+        case == bool:
+          await prefs.setBool(key, data as bool);
+        case == int:
+          await prefs.setInt(key, data as int);
+        case == double:
+          await prefs.setDouble(key, data as double);
+        case == String:
+          await prefs.setString(key, data as String);
+        default:
+          // return left('Type not supported');
+          err = true;
+      }
+    } catch (ex) {
+      // return left('Error : $ex');
+      err = true;
+    }
+
+    return (err, unit);
+  }
+
+  @override
+  Future<(bool, bool)> readBool(String key) async {
+    // TODO
+    bool err = false;
+    bool result = false;
+
+    try {
+      final prefs = await storage();
       final response = prefs.getBool(key);
       if (response != null) {
-        return right(response);
+        result = response;
       }
-      return left('No value found for key $key');
+      // return left('No value found for key $key');
     } catch (ex) {
-      return left('Error : $ex');
+      // return left('Error : $ex');
+      err = true;
     }
+
+    return (err, result);
   }
 }

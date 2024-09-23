@@ -1,29 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import './controllers/settings_page_controller.dart';
+import './controllers/app_controller.dart';
+import './controllers/explore_nearby_restaurant_controller.dart';
+import './controllers/settings_controller.dart';
+import './controllers/root_controller.dart';
+import './data/location_service.dart';
 import './data/local_key_value_storage.dart';
 
-class GlobalInjections {
-  void dependencies() {
-    Get.put<LocalKeyValueStorage>(SharedPreferencesStorage());
-    Get.lazyPut(() => GlobalController(Get.find()));
+class AppInjections {
+  static void dependencies() {
+    Get.putAsync<LocationService>(() => GeolocatorService().conn());
+    Get.putAsync<LocalKeyValueStorage>(() => SharedPreferencesStorage().conn());
+
+    // Controllers
+    Get.lazyPut(() => AppController(Get.find()));
+    Get.lazyPut(() => RootController());
+    Get.lazyPut(() => ExploreNearbyRestaurantController(Get.find()));
     Get.lazyPut(() => SettingsPageController(Get.find()));
-  }
-}
-
-class GlobalController extends GetxController {
-  late ThemeMode themeMode;
-  final LocalKeyValueStorage localStorage;
-  GlobalController(this.localStorage);
-
-  Future setAppThemeMode() async {
-    themeMode = ThemeMode.light;
-    // TODO: Handle error
-    var result =
-        await localStorage.readBool(LocalKeyValueStorageKeys.IsDarkThemeMode);
-    if (result.isRight() && result.getOrElse(() => false)) {
-      themeMode = ThemeMode.dark;
-    }
-    Get.changeThemeMode(themeMode);
   }
 }

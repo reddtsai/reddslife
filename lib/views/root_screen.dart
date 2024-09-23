@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import './home_page.dart';
+import './explore_nearby_restaurant_page.dart';
 import './settings_page.dart';
+import '../controllers/root_controller.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _pageViewIndex = 0;
-  late PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: _pageViewIndex);
-  }
+class RootScreen extends GetView<RootController> {
+  const RootScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +18,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: PageView(
-        controller: _pageController,
+        controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const Center(child: Text('主頁')),
-          const Center(child: Text('吃啥')),
-          const Center(child: Text('錢錢')),
+          const HomePage(),
+          ExploreNearbyRestaurantPage(),
           SettingsPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _pageViewIndex,
+        currentIndex: controller.currentIndex,
         type: BottomNavigationBarType.fixed,
         onTap: (int index) {
-          setState(() {
-            _pageViewIndex = index;
-          });
-          _pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut);
+          controller.onTap(index);
         },
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -57,13 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.fastfood_outlined),
             activeIcon: Icon(Icons.fastfood),
-            label: '吃啥',
+            label: '覓食',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.stacked_line_chart_outlined),
-            activeIcon: Icon(Icons.stacked_line_chart),
-            label: '錢錢',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.stacked_line_chart_outlined),
+          //   activeIcon: Icon(Icons.stacked_line_chart),
+          //   label: '錢錢',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined),
             activeIcon: Icon(Icons.settings),
