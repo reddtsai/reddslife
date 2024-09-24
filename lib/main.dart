@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reddslife/theme.dart';
-import './views/home_screen.dart';
+import './theme.dart';
 import './global.dart';
+import './controllers/app_controller.dart';
+import './views/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  var injection = GlobalInjections();
-  injection.dependencies();
+  AppInjections.dependencies();
 
-  runApp(const ReddsLifeApp());
+  runApp(const App());
 }
 
-class ReddsLifeApp extends StatelessWidget {
-  const ReddsLifeApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   Future initialize() async {
-    var controller = Get.find<GlobalController>();
+    var controller = Get.find<AppController>();
     controller.setAppThemeMode();
   }
 
@@ -27,9 +27,9 @@ class ReddsLifeApp extends StatelessWidget {
       title: 'Redds Life App',
       debugShowCheckedModeBanner: false,
       smartManagement: SmartManagement.full,
-      home: const HomeScreen(),
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      home: const HomePage(),
     );
   }
 }

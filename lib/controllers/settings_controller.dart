@@ -17,12 +17,12 @@ class SettingsPageController extends GetxController {
   }
 
   Future<void> getThemeBrightness() async {
-    var result =
+    final (err, isDark) =
         await localStorage.readBool(LocalKeyValueStorageKeys.IsDarkThemeMode);
 
     // TODO: Handle error
-    if (result.isRight()) {
-      isDarkThemeMode.value = result.getOrElse(() => false);
+    if (!err) {
+      isDarkThemeMode.value = isDark;
     }
   }
 

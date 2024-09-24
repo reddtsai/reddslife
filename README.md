@@ -1,16 +1,3 @@
-# app
+# ReddsLife
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+這款應用旨在具體展現後端工作的價值，讓其不再如同鴨子划水般隱而不見。透過這個平台，我希望將日常的技術想法轉化為實際功能，進一步提升生活的便利性。

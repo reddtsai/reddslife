@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:settings_ui/settings_ui.dart';
-import '../controllers/settings_page_controller.dart';
+import '../controllers/settings_controller.dart';
 
-class SettingsPage extends StatelessWidget {
-  SettingsPage({super.key});
-
-  final SettingsPageController settingsPageController =
-      Get.put(SettingsPageController(Get.find()));
+class SettingsView extends GetView<SettingsPageController> {
+  const SettingsView({super.key});
 
   SettingsSection themeSection() {
     return SettingsSection(
@@ -17,9 +14,9 @@ class SettingsPage extends StatelessWidget {
           title: const Text('深色'),
           leading: const Icon(Icons.brightness_6),
           onToggle: (bool value) {
-            settingsPageController.toggleThemeBrightness(value);
+            controller.toggleThemeBrightness(value);
           },
-          initialValue: settingsPageController.isDarkThemeMode.value,
+          initialValue: controller.isDarkThemeMode.value,
         ),
       ],
     );
