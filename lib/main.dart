@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import './theme.dart';
 import './global.dart';
 import './controllers/app_controller.dart';
-import './views/root_screen.dart';
+import './views/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
       smartManagement: SmartManagement.full,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const RootScreen(),
+      home: const HomePage(),
     );
   }
 }

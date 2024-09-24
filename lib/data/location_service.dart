@@ -5,10 +5,10 @@ abstract class LocationService extends GetxService {
   Future<(bool, Position?)> getCurrentLocation();
 }
 
-class GeolocatorService extends LocationService {
+class GeolocatorService extends GetxService implements LocationService {
   late GeolocatorPlatform geolocatorPlatform;
 
-  Future<GeolocatorService> conn() async {
+  Future<GeolocatorService> init() async {
     geolocatorPlatform = GeolocatorPlatform.instance;
     return this;
   }

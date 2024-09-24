@@ -6,7 +6,7 @@ class LocalKeyValueStorageKeys {
   static const String IsDarkThemeMode = 'IsDarkThemeMode';
 }
 
-abstract class LocalKeyValueStorage extends GetxService {
+abstract class LocalKeyValueStorage {
   // TODO: define result type
   Future<(bool, Unit)> save<T>(String key, T data);
   Future<(bool, bool)> readBool(String key);
@@ -14,10 +14,11 @@ abstract class LocalKeyValueStorage extends GetxService {
 
 typedef SharedPrefsProvider = Future<SharedPreferences> Function();
 
-class SharedPreferencesStorage extends LocalKeyValueStorage {
+class SharedPreferencesStorage extends GetxService
+    implements LocalKeyValueStorage {
   late SharedPrefsProvider storage;
 
-  Future<SharedPreferencesStorage> conn() async {
+  Future<SharedPreferencesStorage> init() async {
     storage = SharedPreferences.getInstance;
     return this;
   }

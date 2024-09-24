@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:settings_ui/settings_ui.dart';
 import '../controllers/settings_controller.dart';
 
-class SettingsPage extends GetView<SettingsPageController> {
-  const SettingsPage({super.key});
+class SettingsView extends GetView<SettingsPageController> {
+  const SettingsView({super.key});
 
   SettingsSection themeSection() {
     return SettingsSection(
