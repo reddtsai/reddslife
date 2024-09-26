@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import './env.dart';
 
 abstract class GoogleService {
   Future<GoogleApiNearbySearchResponse> getNearbyRestaurants(
@@ -20,7 +21,7 @@ class GoogleApi extends GetConnect implements GoogleService {
         'location': '$latitude,$longitude',
         'radius': '1500',
         'type': 'restaurant',
-        'key': '', // TODO: Add your Google API key
+        'key': Env.GOOGLE_MAP_API_KEY,
       },
     );
 
