@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './main_view.dart';
 import './explore_nearby_restaurant_view.dart';
 import './settings_view.dart';
@@ -12,9 +13,12 @@ class HomePage extends GetView<RootController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Row(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text('Redds Life App'), Icon(Icons.notifications)],
+          children: [
+            Text(AppLocalizations.of(context)!.homePageTitle),
+            const Icon(Icons.notifications)
+          ],
         ),
       ),
       body: PageView(
@@ -32,16 +36,16 @@ class HomePage extends GetView<RootController> {
         onTap: (int index) {
           controller.onTap(index);
         },
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: '主頁',
+            icon: const Icon(Icons.home_outlined),
+            activeIcon: const Icon(Icons.home),
+            label: AppLocalizations.of(context)!.mainView,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fastfood_outlined),
-            activeIcon: Icon(Icons.fastfood),
-            label: '覓食',
+            icon: const Icon(Icons.fastfood_outlined),
+            activeIcon: const Icon(Icons.fastfood),
+            label: AppLocalizations.of(context)!.exploreNearbyRestaurantView,
           ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.stacked_line_chart_outlined),
@@ -49,9 +53,9 @@ class HomePage extends GetView<RootController> {
           //   label: '錢錢',
           // ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            activeIcon: Icon(Icons.settings),
-            label: '設定',
+            icon: const Icon(Icons.settings_outlined),
+            activeIcon: const Icon(Icons.settings),
+            label: AppLocalizations.of(context)!.settingsView,
           ),
         ],
       ),

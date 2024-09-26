@@ -1,0 +1,8 @@
+{
+    "mainView": "Main",
+    "exploreNearbyRestaurantView": "Food",
+    "settingsView": "Settings",
+    "settingsViewThemeSectionTitle": "Theme",
+    "settingsViewThemeSectionDarkMode": "Dark Mode",
+    "homePageTitle": "Redds Life"
+}
