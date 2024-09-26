@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './theme.dart';
 import './global.dart';
 import './controllers/app_controller.dart';
@@ -24,12 +25,13 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       onInit: () => initialize(),
-      title: 'Redds Life App',
       debugShowCheckedModeBanner: false,
       smartManagement: SmartManagement.full,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       home: const HomePage(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

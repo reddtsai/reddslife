@@ -16,5 +16,6 @@ class AppController extends GetxController {
       themeMode = ThemeMode.dark;
     }
     Get.changeThemeMode(themeMode);
+    // Get.updateLocale(Locale('en'));
   }
 }
