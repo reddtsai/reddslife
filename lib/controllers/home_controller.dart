@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class RootController extends GetxController {
+class HomeController extends GetxController {
   late Rx<PageController> _pageController;
   final _currentIndex = 0.obs;
   int get currentIndex => _currentIndex.value;
