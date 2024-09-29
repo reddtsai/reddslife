@@ -26,12 +26,13 @@ class ChatController extends GetxController {
   String get inputText => _inputText.value;
   late FocusNode focusNode;
   late TextEditingController textController;
+  late ScrollController scrollController;
 
   void onInputChanged(String text) {
     _inputText.value = text;
   }
 
-  void sendMessage() {
+  Future<void> sendMessage() async {
     if (inputText.isNotEmpty) {
       _message.insert(
         0,
@@ -42,6 +43,12 @@ class ChatController extends GetxController {
           createdAt: DateTime.now(),
         ),
       );
+
+      scrollController.animateTo(
+        0.0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
       _inputText.value = '';
       textController.clear();
     }
@@ -51,6 +58,7 @@ class ChatController extends GetxController {
   void onInit() {
     focusNode = FocusNode();
     textController = TextEditingController();
+    scrollController = ScrollController();
     // TODO: implement read messages
 
     super.onInit();
@@ -60,6 +68,7 @@ class ChatController extends GetxController {
   void onClose() {
     focusNode.dispose();
     textController.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 }

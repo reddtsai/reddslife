@@ -26,12 +26,14 @@ class ChatPage extends GetView<ChatController> {
         children: [
           Expanded(
             child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
               onTap: () {
                 controller.focusNode.unfocus();
               },
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Obx(() => ListView.builder(
+                      controller: controller.scrollController,
                       reverse: true,
                       shrinkWrap: true,
                       itemCount: controller.message.length,
