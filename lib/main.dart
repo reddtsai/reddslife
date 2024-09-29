@@ -32,6 +32,7 @@ class App extends StatelessWidget {
       home: const HomePage(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      getPages: AppInjections.pages(),
     );
   }
 }

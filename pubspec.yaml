@@ -43,6 +43,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  flutter_chat_bubble: ^2.0.2
 
 dev_dependencies:
   flutter_test:

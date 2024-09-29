@@ -1,6 +1,7 @@
 {
     "mainView": "Main",
     "exploreNearbyRestaurantView": "Food",
+    "chatsView": "Chats",
     "settingsView": "Settings",
     "settingsViewThemeSectionTitle": "Theme",
     "settingsViewThemeSectionDarkMode": "Dark Mode",
