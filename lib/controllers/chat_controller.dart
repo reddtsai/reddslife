@@ -1,12 +1,65 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+
+enum ChatMessageType {
+  sent,
+  received,
+}
+
+class ChatMessageModel {
+  final String id;
+  final String message;
+  final ChatMessageType type;
+  final DateTime createdAt;
+  ChatMessageModel({
+    required this.id,
+    required this.message,
+    required this.type,
+    required this.createdAt,
+  });
+}
 
 class ChatController extends GetxController {
-  final RxList<String> _message = <String>[].obs;
-  get message => _message;
+  final RxList<ChatMessageModel> _message = <ChatMessageModel>[].obs;
+  List<ChatMessageModel> get message => _message;
+  final RxString _inputText = ''.obs;
+  String get inputText => _inputText.value;
+  late FocusNode focusNode;
+  late TextEditingController textController;
+
+  void onInputChanged(String text) {
+    _inputText.value = text;
+  }
+
+  void sendMessage() {
+    if (inputText.isNotEmpty) {
+      _message.insert(
+        0,
+        ChatMessageModel(
+          id: DateTime.now().toString(),
+          message: _inputText.value,
+          type: ChatMessageType.sent,
+          createdAt: DateTime.now(),
+        ),
+      );
+      _inputText.value = '';
+      textController.clear();
+    }
+  }
 
   @override
   void onInit() {
-    message.addAll(['1', '2', '3']);
+    focusNode = FocusNode();
+    textController = TextEditingController();
+    // TODO: implement read messages
+
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    focusNode.dispose();
+    textController.dispose();
+    super.onClose();
   }
 }

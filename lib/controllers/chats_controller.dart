@@ -6,7 +6,7 @@ class ChatsController extends GetxController {
 
   @override
   void onInit() {
-    _chats.addAll(['Chat 1', 'Chat 2', 'Chat 3']);
+    // TODO: implement read chats
     super.onInit();
   }
 }

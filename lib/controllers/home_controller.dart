@@ -2,20 +2,25 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends GetxController {
-  late Rx<PageController> _pageController;
+  late PageController pageController;
   final _currentIndex = 0.obs;
   int get currentIndex => _currentIndex.value;
-  PageController get pageController => _pageController.value;
 
   @override
   void onInit() {
-    _pageController = PageController(initialPage: currentIndex).obs;
+    pageController = PageController(initialPage: currentIndex);
     super.onInit();
   }
 
   void onTap(int index) {
     _currentIndex.value = index;
-    _pageController.value.animateToPage(index,
+    pageController.animateToPage(index,
         duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+    super.onClose();
   }
 }
