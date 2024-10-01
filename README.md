@@ -28,6 +28,13 @@ npm install -g firebase-tools
 firebase login
 # 安裝 flutterfire cli
 dart pub global activate flutterfire_cli
+```
+
+- 加入應用程式
+
+```
+# 建立應用程式
+flutter create project-name
 # 設定工作流程
 flutterfire configure
 ```
