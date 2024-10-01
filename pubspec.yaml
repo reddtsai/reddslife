@@ -58,6 +58,7 @@ dev_dependencies:
   envied_generator: ^0.5.4+1
   build_runner: ^2.4.12
   intl_translation: ^0.20.0
+  change_app_package_name: ^1.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
