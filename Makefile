@@ -6,6 +6,12 @@ gen-env:
 encrypt-env:
 	openssl base64 -in .env -out env.base64
 
+.PHONY: encrypt-firebase
+encrypt-firebase:
+	openssl base64 -in android/app/google-services.json -out google-services.base64
+	openssl base64 -in ios/Runner/GoogleService-Info.plist -out GoogleService-Info.base64
+	openssl base64 -in firebase.json -out firebase.base64
+
 .PHONY: decrypt-env
 decrypt-env:
 	openssl base64 -d -in env.base64 -out .env

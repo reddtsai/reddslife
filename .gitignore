@@ -46,3 +46,11 @@ app.*.map.json
 *.env
 env.g.dart
 env.base64
+
+# Firebase
+firebase.json
+firebase.base64
+google-services.json
+google-services.base64
+GoogleService-Info.plist
+GoogleService-Info.base64
