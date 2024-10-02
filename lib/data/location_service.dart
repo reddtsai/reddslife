@@ -40,8 +40,6 @@ class GeolocatorService extends GetxService implements LocationService {
       }
     }
     if (permission == LocationPermission.deniedForever) {
-      // TODO
-      print('Location permissions denied forever');
       return (false, 'Location permissions denied forever');
     }
 

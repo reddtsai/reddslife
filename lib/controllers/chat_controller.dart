@@ -1,46 +1,32 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
-enum ChatMessageType {
-  sent,
-  received,
-}
-
-class ChatMessageModel {
-  final String id;
-  final String message;
-  final ChatMessageType type;
-  final DateTime createdAt;
-  ChatMessageModel({
-    required this.id,
-    required this.message,
-    required this.type,
-    required this.createdAt,
-  });
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../data/firebase_service.dart';
+import '../models/messages_collection_model.dart';
 
 class ChatController extends GetxController {
-  final RxList<ChatMessageModel> _message = <ChatMessageModel>[].obs;
-  List<ChatMessageModel> get message => _message;
-  final RxString _inputText = ''.obs;
-  String get inputText => _inputText.value;
+  final String userID = '12345';
+  late String title;
+  late String chatID;
+  final RxBool _loading = false.obs;
+  bool get loading => _loading.value;
   late FocusNode focusNode;
   late TextEditingController textController;
   late ScrollController scrollController;
+  final FirebaseService firebaseService;
+  late Stream<QuerySnapshot> messages;
 
-  void onInputChanged(String text) {
-    _inputText.value = text;
-  }
+  ChatController(this.firebaseService);
 
   Future<void> sendMessage() async {
-    if (inputText.isNotEmpty) {
-      _message.insert(
-        0,
-        ChatMessageModel(
-          id: DateTime.now().toString(),
-          message: _inputText.value,
-          type: ChatMessageType.sent,
-          createdAt: DateTime.now(),
+    _loading.value = true;
+    if (textController.text.isNotEmpty) {
+      firebaseService.sendMessage(
+        chatID,
+        MessagesCollectionModel(
+          message: textController.text,
+          fromID: userID,
+          date: Timestamp.now(),
         ),
       );
 
@@ -49,9 +35,10 @@ class ChatController extends GetxController {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
-      _inputText.value = '';
       textController.clear();
     }
+
+    _loading.value = false;
   }
 
   @override
@@ -59,7 +46,9 @@ class ChatController extends GetxController {
     focusNode = FocusNode();
     textController = TextEditingController();
     scrollController = ScrollController();
-    // TODO: implement read messages
+    title = Get.parameters['name'] ?? 'NONE';
+    chatID = Get.parameters['id']!;
+    messages = firebaseService.getMessages(chatID);
 
     super.onInit();
   }

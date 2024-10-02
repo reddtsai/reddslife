@@ -2,6 +2,7 @@
     "mainView": "Main",
     "exploreNearbyRestaurantView": "Food",
     "chatsView": "Chats",
+    "chatsViewCenterText": "Add some chats",
     "settingsView": "Settings",
     "settingsViewThemeSectionTitle": "Theme",
     "settingsViewThemeSectionDarkMode": "Dark Mode",

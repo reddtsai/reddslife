@@ -13,6 +13,11 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-      - run: echo "GOOGLE_MAP_API_KEY=${{ secrets.GOOGLE_MAP_API_KEY }}" >> .env
+      - name: add env file
+        run: echo ${{ secrets.ENV }}" | base64 --decode  >> env.json
+      - name: add ios google services
+        run: echo ${{ secrets.IOS_GOOGLE_SERVICES }}" | base64 --decode  >> ios/Runner/GoogleService-Info.plist
+      - name: add android google services
+        run: echo ${{ secrets.ANDROID_GOOGLE_SERVICES }}" | base64 --decode  >> android/app/google-services.json
       - run: flutter pub get
-      - run: flutter build ios --release --no-codesign
+      - run: flutter build ios --release --no-codesign --dart-define-from-file=env.json

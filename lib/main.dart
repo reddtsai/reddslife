@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -5,10 +6,14 @@ import './theme.dart';
 import './global.dart';
 import './controllers/app_controller.dart';
 import './views/home_page.dart';
+import './firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppInjections.dependencies();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  Global.dependencies();
 
   runApp(const App());
 }
@@ -32,7 +37,7 @@ class App extends StatelessWidget {
       home: const HomePage(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      getPages: AppInjections.pages(),
+      getPages: Global.pages(),
     );
   }
 }
