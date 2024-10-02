@@ -21,7 +21,7 @@ class GoogleApi extends GetConnect implements GoogleService {
         'location': '$latitude,$longitude',
         'radius': '1500',
         'type': 'restaurant',
-        'key': Env.GOOGLE_MAP_API_KEY,
+        'key': String.fromEnvironment(Env.googleMapApiKey),
       },
     );
 

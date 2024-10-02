@@ -2,6 +2,7 @@
     "mainView": "主頁",
     "exploreNearbyRestaurantView": "覓食",
     "chatsView": "聊天",
+    "chatsViewCenterText": "開始聊天",
     "settingsView": "設定",
     "settingsViewThemeSectionTitle": "主題",
     "settingsViewThemeSectionDarkMode": "深色模式",

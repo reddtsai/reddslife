@@ -43,8 +43,7 @@ app.*.map.json
 /android/app/release
 
 # configuration and secrets
-*.env
-env.g.dart
+env.json
 env.base64
 
 # Firebase

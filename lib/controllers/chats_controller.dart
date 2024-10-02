@@ -1,12 +1,16 @@
 import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../data/firebase_service.dart';
 
 class ChatsController extends GetxController {
-  final RxList<String> _chats = <String>[].obs;
-  get chat => _chats;
+  final FirebaseService firebaseService;
+  late Stream<QuerySnapshot> chats;
+
+  ChatsController(this.firebaseService);
 
   @override
   void onInit() {
-    // TODO: implement read chats
+    chats = firebaseService.getChats();
     super.onInit();
   }
 }
