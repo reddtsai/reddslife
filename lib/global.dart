@@ -6,10 +6,10 @@ import './controllers/chats_controller.dart';
 import './controllers/explore_nearby_restaurant_controller.dart';
 import './controllers/settings_controller.dart';
 import './controllers/home_controller.dart';
-import './data/location_service.dart';
-import './data/local_key_value_storage.dart';
-import './data/google_map_service.dart';
-import './data/firebase_service.dart';
+import './services/location_service.dart';
+import './services/local_key_value_storage.dart';
+import './services/google_map_service.dart';
+import './services/firebase_service.dart';
 import './views/chat_page.dart';
 
 class Global {
