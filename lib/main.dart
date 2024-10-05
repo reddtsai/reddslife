@@ -18,18 +18,13 @@ void main() async {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends GetWidget<AppController> {
   const App({super.key});
-
-  Future initialize() async {
-    var controller = Get.find<AppController>();
-    controller.setAppThemeMode();
-  }
 
   @override
   Widget build(BuildContext context) {
+    controller.setAppThemeMode();
     return GetMaterialApp(
-      onInit: () => initialize(),
       debugShowCheckedModeBanner: false,
       smartManagement: SmartManagement.full,
       theme: AppTheme.lightTheme,

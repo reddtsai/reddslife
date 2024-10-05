@@ -41,3 +41,7 @@ flutterfire configure
 
 > 上述是以 Flutter 應用程式示範，其它程式語言的步驟有些微不同
 > firebase 13.20.1
+
+## Demo
+
+![chatting](https://github.com/reddtsai/issue/blob/main/images/reddslife-chatting.gif) ![notification](https://github.com/reddtsai/issue/blob/main/images/reddslife-notification.png)

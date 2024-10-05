@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import './controllers/app_controller.dart';
 import './controllers/chats_controller.dart';
@@ -13,9 +14,12 @@ import './views/chat_page.dart';
 
 class Global {
   static void dependencies() {
+    // TODO: Auth
+    String userID = '1';
+
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    firestore.settings = const Settings(persistenceEnabled: true);
-    Get.put(FirebaseService(firestore));
+    FirebaseMessaging firemessage = FirebaseMessaging.instance;
+    Get.put(FirebaseService(firestore, firemessage, userID));
     Get.putAsync<LocationService>(() => GeolocatorService().init());
     Get.putAsync<LocalKeyValueStorage>(() => SharedPreferencesStorage().init());
     Get.putAsync<GoogleService>(() => GoogleApi().init());
@@ -30,11 +34,14 @@ class Global {
   }
 
   static List<GetPage> pages() {
+    // TODO: Auth
+    String userID = '1';
+
     return [
       GetPage(
         name: '/chat/:id/:name',
         page: () => ChatPage(),
-        binding: ChatPageBinding(),
+        binding: ChatPageBinding(userID),
       ),
     ];
   }

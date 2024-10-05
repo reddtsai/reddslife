@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../controllers/chat_controller.dart';
 import '../models/messages_collection_model.dart';
 
 class ChatPageBinding extends Bindings {
+  String userID;
+
+  ChatPageBinding(this.userID);
+
   @override
   void dependencies() {
-    Get.lazyPut<ChatController>(() => ChatController(Get.find()));
+    Get.lazyPut<ChatController>(() => ChatController(Get.find(), userID));
   }
 }
 
@@ -52,9 +54,45 @@ class ChatPage extends GetView<ChatController> {
                             itemBuilder: (context, index) {
                               MessagesCollectionModel message =
                                   messages[index].data();
-                              return message.fromID == controller.userID
-                                  ? getSenderView(context, message)
-                                  : getReceiverView(context, message);
+                              return Container(
+                                padding: const EdgeInsets.only(
+                                  left: 15,
+                                  right: 15,
+                                  top: 10,
+                                  bottom: 10,
+                                ),
+                                child: Align(
+                                  alignment: message.fromID == controller.userID
+                                      ? Alignment.topRight
+                                      : Alignment.topLeft,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color:
+                                          (message.fromID == controller.userID
+                                              ? Colors.blue
+                                              : Colors.grey),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          message.message,
+                                          style: const TextStyle(
+                                              color: Colors.white),
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Text(message.formattedDate,
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12)),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
                           );
                         },
@@ -95,62 +133,6 @@ class ChatPage extends GetView<ChatController> {
         ),
       ),
     );
-  }
-
-  getSenderView(BuildContext context, MessagesCollectionModel data) =>
-      ChatBubble(
-        clipper: ChatBubbleClipper1(type: BubbleType.sendBubble),
-        alignment: Alignment.topRight,
-        margin: const EdgeInsets.only(top: 20),
-        backGroundColor: Colors.blue,
-        child: Container(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.7,
-          ),
-          child: Column(
-            children: [
-              Text(
-                data.message,
-                style: const TextStyle(color: Colors.white),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(data.formattedDate,
-                  style: const TextStyle(color: Colors.white, fontSize: 12)),
-            ],
-          ),
-        ),
-      );
-
-  getReceiverView(BuildContext context, MessagesCollectionModel data) =>
-      ChatBubble(
-        clipper: ChatBubbleClipper1(type: BubbleType.receiverBubble),
-        backGroundColor: const Color(0xffE7E7ED),
-        margin: const EdgeInsets.only(top: 20),
-        child: Container(
-          constraints: BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width * 0.7,
-          ),
-          child: Column(
-            children: [
-              Text(
-                data.message,
-                style: const TextStyle(color: Colors.black),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(data.formattedDate,
-                  style: const TextStyle(color: Colors.black, fontSize: 12)),
-            ],
-          ),
-        ),
-      );
-
-  static String formatDateTime(DateTime dateTime) {
-    final DateFormat dateFormat = DateFormat('hh:mm a');
-    return dateFormat.format(dateTime);
   }
 }
 

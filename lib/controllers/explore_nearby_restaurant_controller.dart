@@ -1,12 +1,7 @@
 import 'package:get/get.dart';
 import '../data/location_service.dart';
 import '../data/google_map_service.dart';
-
-class NearbyRestaurantModel {
-  final String name;
-  final double rating;
-  NearbyRestaurantModel(this.name, this.rating);
-}
+import '../models/nearby_restaurant_model.dart';
 
 class ExploreNearbyRestaurantController extends GetxController {
   final _nearbyRestaurants = <NearbyRestaurantModel>[].obs;
