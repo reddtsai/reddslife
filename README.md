@@ -44,4 +44,4 @@ flutterfire configure
 
 ## Demo
 
-![chatting](https://github.com/reddtsai/issue/blob/main/images/reddslife-chatting.gif | width=250) ![notification](https://github.com/reddtsai/issue/blob/main/images/reddslife-notification.png | width=250)
+<img src="https://github.com/reddtsai/issue/blob/main/images/reddslife-chatting.gif" width="250"><img src="https://github.com/reddtsai/issue/blob/main/images/reddslife-notification.png" width="250">
