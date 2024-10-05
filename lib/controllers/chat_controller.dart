@@ -5,7 +5,8 @@ import '../data/firebase_service.dart';
 import '../models/messages_collection_model.dart';
 
 class ChatController extends GetxController {
-  final String userID = '12345';
+  String userID;
+
   late String title;
   late String chatID;
   final RxBool _loading = false.obs;
@@ -16,7 +17,7 @@ class ChatController extends GetxController {
   final FirebaseService firebaseService;
   late Stream<QuerySnapshot> messages;
 
-  ChatController(this.firebaseService);
+  ChatController(this.firebaseService, this.userID);
 
   Future<void> sendMessage() async {
     _loading.value = true;

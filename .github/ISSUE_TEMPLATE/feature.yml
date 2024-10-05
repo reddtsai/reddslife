@@ -18,6 +18,8 @@ body:
         - 更新功能
         - 優化功能
         - 文件
+        - 測試
+        - 其他
     validations:
       required: true
 
