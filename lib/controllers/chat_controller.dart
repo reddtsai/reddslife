@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../data/firebase_service.dart';
+import '../services/firebase_service.dart';
 import '../models/messages_collection_model.dart';
 
 class ChatController extends GetxController {

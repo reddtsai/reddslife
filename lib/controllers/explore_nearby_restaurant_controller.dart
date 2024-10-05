@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import '../data/location_service.dart';
-import '../data/google_map_service.dart';
+import '../services/location_service.dart';
+import '../services/google_map_service.dart';
 import '../models/nearby_restaurant_model.dart';
 
 class ExploreNearbyRestaurantController extends GetxController {

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import '../data/local_key_value_storage.dart';
+import '../services/local_key_value_storage.dart';
 
 class SettingsPageController extends GetxController {
   Rx<bool> isDarkThemeMode = false.obs;
